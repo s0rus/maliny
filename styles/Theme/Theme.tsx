@@ -1,7 +1,7 @@
 const Theme = {
   colors: {
     primary: '#3772ff',
-    primaryHover: '#3772dd',
+    primaryHover: '#3772cc',
     success: '#60a561',
     error: '#ee2e31',
     light: '#f5efed',
