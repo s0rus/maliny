@@ -1,7 +1,7 @@
-import React, { FC, HTMLInputTypeAttribute } from 'react';
+import React, { FC, HTMLInputTypeAttribute, InputHTMLAttributes } from 'react';
 import { SInput, SLabel } from './Input.styles';
 
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   type?: HTMLInputTypeAttribute;
   label?: string;
   placeholder?: string;
