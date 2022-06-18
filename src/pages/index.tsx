@@ -1,10 +1,13 @@
-import Button from '@/components/common/Button';
-import Input from '@/components/common/Input';
 import Navbar from '@/components/common/Navbar';
 import ContentTemplate from '@/styles/Templates/ContentTemplate';
-import type { NextPage } from 'next';
+import { trpc } from '@/utils/trpc';
 
-const Home: NextPage = () => {
+const Home = () => {
+  const { data, isLoading } = trpc.useQuery(['hello', { text: 'Peter!' }]);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (data) return <div>{data.greeting}</div>;
+
   return (
     <ContentTemplate>
       <Navbar />
