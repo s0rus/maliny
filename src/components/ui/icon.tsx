@@ -1,0 +1,40 @@
+import {
+  AlertCircleIcon,
+  CheckIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  DotIcon,
+  FileEditIcon,
+  HomeIcon,
+  Loader2Icon,
+  MoonIcon,
+  MoreHorizontalIcon,
+  PackagePlusIcon,
+  PlusIcon,
+  SearchIcon,
+  SunIcon,
+  TrashIcon,
+  XIcon,
+  type LucideIcon,
+} from "lucide-react";
+
+export type Icon = LucideIcon;
+
+export const Icon = {
+  sun: SunIcon,
+  moon: MoonIcon,
+  search: SearchIcon,
+  loading: Loader2Icon,
+  edit: FileEditIcon,
+  delete: TrashIcon,
+  checkmark: CheckIcon,
+  home: HomeIcon,
+  x: XIcon,
+  plus: PlusIcon,
+  addProduct: PackagePlusIcon,
+  dot: DotIcon,
+  more: MoreHorizontalIcon,
+  alert: AlertCircleIcon,
+  chevronRight: ChevronRightIcon,
+  chevronLeft: ChevronLeftIcon,
+};

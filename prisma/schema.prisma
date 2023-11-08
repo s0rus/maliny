@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Category {
+  id         String    @id @unique @default(uuid())
+  name       String
+  product    Product[]
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+}
+
+model Product {
+  id          String @id @unique @default(uuid())
+  name        String
+  description String
+  price       Float
+  stock       Int
+
+  category_id String
+  category    Category @relation(fields: [category_id], references: [id], onDelete: NoAction)
+
+  specifications ProductSpecification[]
+
+  images Image[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([category_id])
+}
+
+model ProductSpecification {
+  id    String @id @unique @default(uuid())
+  value String
+
+  product_id String
+  product    Product @relation(fields: [product_id], references: [id], onDelete: Cascade)
+
+  spec_id       String
+  specification Specification @relation(fields: [spec_id], references: [id], onDelete: Cascade)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([product_id])
+  @@index([spec_id])
+}
+
+model Specification {
+  id   String  @id @unique @default(uuid())
+  name String
+  unit String?
+
+  products ProductSpecification[]
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Image {
+  id        String @id @unique @default(uuid())
+  image_key String
+  image_url String
+
+  product_id String
+  product    Product @relation(fields: [product_id], references: [id], onDelete: Cascade)
+
+  @@index([product_id])
+}
