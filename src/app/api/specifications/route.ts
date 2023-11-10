@@ -1,4 +1,4 @@
-import { type NewSpecificationSchema } from "@/app/(dashboard)/(routes)/dashboard/specifications/components/manage-specification-form";
+import { type SpecificationSchema } from "@/app/(dashboard)/(routes)/dashboard/specifications/manage-specifications/actions";
 import { db } from "@/db";
 import { NextResponse, type NextRequest } from "next/server";
 
@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const data = (await request.json()) as NewSpecificationSchema;
+    const data = (await request.json()) as SpecificationSchema;
     const { name: specName, unit } = data;
 
     if (!specName) {
@@ -73,16 +73,16 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
-    const data = (await request.json()) as NewSpecificationSchema;
-    const { specId, name: specName, unit } = data;
+    const data = (await request.json()) as SpecificationSchema;
+    const { id, name, unit } = data;
 
-    if (!specId) {
+    if (!id) {
       return NextResponse.json("specId is required", {
         status: 400,
       });
     }
 
-    if (!specName) {
+    if (!name) {
       return NextResponse.json("specName is required", {
         status: 400,
       });
@@ -90,10 +90,10 @@ export async function PUT(request: NextRequest) {
 
     const updatedSpecification = await db.specification.update({
       where: {
-        id: specId,
+        id,
       },
       data: {
-        name: specName,
+        name,
         unit,
       },
     });
@@ -114,9 +114,9 @@ export async function PUT(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    const { specId } = (await request.json()) as { specId: string };
+    const { id } = (await request.json()) as { id: string };
 
-    if (!specId) {
+    if (!id) {
       return NextResponse.json("specId is required", {
         status: 400,
       });
@@ -124,7 +124,7 @@ export async function DELETE(request: NextRequest) {
 
     const removedSpec = await db.specification.delete({
       where: {
-        id: specId,
+        id,
       },
     });
 
