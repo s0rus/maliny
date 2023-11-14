@@ -48,15 +48,14 @@ export function ImageBrowser({
       <div className="flex flex-col gap-2">
         {mainImageIndex >= 0 && !withoutBigPreview && (
           <DialogTrigger asChild>
-            <div className="flex h-[364px] w-[300px] cursor-pointer items-center justify-center overflow-hidden object-contain object-center p-2">
-              <Image
-                src={mainImageUrl}
-                alt="image"
-                width={300}
-                height={364}
-                priority
-              />
-            </div>
+            <Image
+              src={mainImageUrl}
+              alt="image"
+              width={300}
+              height={364}
+              priority
+              className="h-auto max-w-full cursor-pointer"
+            />
           </DialogTrigger>
         )}
         <div className="flex flex-row gap-4">

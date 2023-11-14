@@ -1,8 +1,10 @@
 import {
   AlertCircleIcon,
   CheckIcon,
+  ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
+  ClockIcon,
   DotIcon,
   FileEditIcon,
   HomeIcon,
@@ -12,8 +14,11 @@ import {
   PackagePlusIcon,
   PlusIcon,
   SearchIcon,
+  ShoppingBasketIcon,
   SunIcon,
   TrashIcon,
+  TruckIcon,
+  UserIcon,
   XIcon,
   type LucideIcon,
 } from "lucide-react";
@@ -37,4 +42,9 @@ export const Icon = {
   alert: AlertCircleIcon,
   chevronRight: ChevronRightIcon,
   chevronLeft: ChevronLeftIcon,
+  chevronDown: ChevronDownIcon,
+  user: UserIcon,
+  cart: ShoppingBasketIcon,
+  clock: ClockIcon,
+  truck: TruckIcon,
 };

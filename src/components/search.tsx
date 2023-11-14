@@ -1,8 +1,16 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { ROUTES } from "@/app/api/routes";
+import {
+  redirect,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import { SearchResults } from "./search-results";
+import { Button } from "./ui/button";
+import { Icon } from "./ui/icon";
 import { Input } from "./ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
@@ -12,6 +20,7 @@ export function Search() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const query = searchParams.get(Q_PARAM)?.toString() ?? "";
 
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams);
@@ -23,14 +32,21 @@ export function Search() {
     router.replace(`${pathname}?${params.toString()}`);
   }, 300);
 
-  const query = searchParams.get(Q_PARAM)?.toString() ?? "";
+  function searchAction() {
+    if (!query) {
+      return;
+    }
+
+    redirect(`${ROUTES.SEARCH}?q=${query}`);
+  }
 
   return (
-    <>
-      <form>
-        <Popover>
+    <form action={searchAction}>
+      <Popover>
+        <div className="flex">
           <PopoverTrigger asChild>
             <Input
+              name="q"
               type="text"
               autoComplete="off"
               onChange={(e) => {
@@ -40,18 +56,24 @@ export function Search() {
               className="w-[60vw]"
             />
           </PopoverTrigger>
-          {query && (
-            <PopoverContent
-              className="w-[60vw]"
-              onOpenAutoFocus={(e) => {
-                e.preventDefault();
-              }}
-            >
-              <SearchResults q={query} />
-            </PopoverContent>
-          )}
-        </Popover>
-      </form>
-    </>
+          <Button type="submit">
+            <Icon.search />
+          </Button>
+        </div>
+        {query && (
+          <PopoverContent
+            onFocusCapture={(e) => {
+              e.preventDefault();
+            }}
+            className="w-[60vw]"
+            onOpenAutoFocus={(e) => {
+              e.preventDefault();
+            }}
+          >
+            <SearchResults q={query} />
+          </PopoverContent>
+        )}
+      </Popover>
+    </form>
   );
 }

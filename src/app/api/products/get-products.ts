@@ -8,14 +8,15 @@ import {
 } from "@prisma/client";
 import { API_ROUTES } from "../routes";
 
-type Specifications = (ProductSpecification & {
+export type Specifications = (ProductSpecification & {
   specification: Specification;
 })[];
 
 export type FullProduct = Product & {
   specifications: Specifications;
   images: Image[];
-} & Category;
+  category: Category;
+};
 
 export async function getProducts(): Promise<FullProduct[]> {
   const response = await fetch(`${getBaseUrl()}/${API_ROUTES.PRODUCTS}`);

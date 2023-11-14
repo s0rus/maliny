@@ -1,10 +1,16 @@
 import { getProductById } from "@/app/api/products/get-product-by-id";
 import { ImageBrowser } from "@/components/image-browser";
 import { Badge } from "@/components/ui/badge";
+
 import { Separator } from "@/components/ui/separator";
 import { TypographyH3 } from "@/components/ui/typography/typography-h3";
 import { TypographyMuted } from "@/components/ui/typography/typography-muted";
 import { Suspense } from "react";
+import { AddToCartDetails } from "./components/add-to-cart-details";
+
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { cn } from "@/lib/utils";
+import { SpecPreview } from "./components/spec-preview";
 
 interface CertainProductPageProps {
   params: {
@@ -24,36 +30,51 @@ export default async function CertainProductPage({
 
   return (
     <Suspense fallback={"Loading..."}>
-      <div className="flex flex-row justify-between gap-32 pt-16">
-        <div>
-          <ImageBrowser images={productImages} />
-        </div>
-        <div className="flex-1 pt-16">
-          <div className="flex flex-col gap-4">
-            <div>
-              <TypographyH3>{product.name}</TypographyH3>
-              <Badge variant="secondary">{product.category.name}</Badge>
-            </div>
-            <Separator />
-            <div className="flex flex-row justify-between">
-              <div>
-                <ul className="flex flex-col">
-                  {specPreview.map((spec) => (
-                    <li
-                      key={spec.specification.id}
-                      className="inline-flex items-baseline gap-2"
-                    >
-                      <TypographyMuted>
-                        {spec.specification.name}:
-                      </TypographyMuted>
-                      {spec.value} {spec.specification.unit ?? null}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>xDDDD</div>
-            </div>
+      <div className="flex flex-col gap-12">
+        <div className="flex flex-row justify-between gap-32 pt-16">
+          <div>
+            <ImageBrowser images={productImages} />
           </div>
+          <div className="flex flex-1 flex-row justify-between gap-4 pt-16">
+            <div className="flex flex-1 flex-col gap-4">
+              <div>
+                <TypographyH3>{product.name}</TypographyH3>
+                <Badge variant="secondary">{product.category.name}</Badge>
+              </div>
+              <Separator />
+              <div className="flex flex-row justify-between">
+                <SpecPreview specList={specPreview} />
+              </div>
+            </div>
+            <AddToCartDetails price={product.price} stock={product.stock} />
+          </div>
+        </div>
+        <div className="prose prose-invert">
+          <h2 className="text-4xl">{product.name}</h2>
+          <p>{product.description}</p>
+        </div>
+        <Separator />
+        <div id="specification">
+          <TypographyH3>Specification:</TypographyH3>
+          <Table className="mt-4">
+            <TableBody>
+              {specPreview.map((spec, index) => (
+                <TableRow
+                  key={spec.specification.id}
+                  className={cn(index % 2 !== 1 && "bg-muted/20")}
+                >
+                  <TableCell className="pl-24">
+                    <TypographyMuted className="text-base">
+                      {spec.specification.name}
+                    </TypographyMuted>
+                  </TableCell>
+                  <TableCell className="text-left">
+                    {spec.value} {spec.specification.unit ?? null}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
       </div>
     </Suspense>

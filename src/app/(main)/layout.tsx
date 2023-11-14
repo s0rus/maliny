@@ -1,3 +1,4 @@
+import { Footer } from "@/components/footer";
 import MainNavbar from "@/components/main-navbar";
 
 interface MainLayoutProps {
@@ -10,6 +11,7 @@ export default function MainLayout(props: MainLayoutProps) {
       <MainNavbar />
       <div className="pt-16" />
       {props.children}
+      <Footer />
     </>
   );
 }

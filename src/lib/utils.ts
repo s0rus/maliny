@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from "clsx";
+import dayjs from "dayjs";
 import { type ReadonlyURLSearchParams } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
@@ -29,6 +30,43 @@ export function capitalizeWord(word: string) {
   }
 
   return word[0].toUpperCase() + word.slice(1).toLowerCase();
+}
+
+interface ShippingInfo {
+  arrival: string;
+  payWithin: string | null;
+}
+
+export function calculateShippingInfo(): ShippingInfo {
+  const orderDate = dayjs();
+  const parsedOrderDate = dayjs(orderDate, { format: "YYYY-MM-DD HH:mm:ss" });
+
+  const cutoffTime = dayjs().set("hour", 16).set("minute", 0).set("second", 0);
+
+  const timeLeft = cutoffTime.diff(parsedOrderDate, "minutes");
+  const hours = Math.floor(timeLeft / 60);
+  const minutes = timeLeft % 60;
+
+  let shippingDate = dayjs(parsedOrderDate).isBefore(cutoffTime)
+    ? dayjs(parsedOrderDate).add(1, "day")
+    : dayjs(parsedOrderDate).add(2, "day");
+
+  if (shippingDate.day() === 0) {
+    shippingDate = shippingDate.add(1, "day");
+  } else if (shippingDate.day() === 6) {
+    shippingDate = shippingDate.add(2, "day");
+  }
+
+  const isLongerThan2Days = shippingDate.diff(parsedOrderDate, "days") > 2;
+
+  return {
+    arrival: isLongerThan2Days
+      ? shippingDate.format("DD/MM/YYYY")
+      : shippingDate.isSame(parsedOrderDate, "day")
+      ? "tomorrow"
+      : "day after tomorrow",
+    payWithin: timeLeft > 0 ? `${hours} hours ${minutes} minutes` : null,
+  };
 }
 
 export function getBaseUrl() {

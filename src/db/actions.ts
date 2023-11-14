@@ -3,23 +3,13 @@
 import { type FullProduct } from "@/app/api/products/get-products";
 import { db } from ".";
 
-// const ProductSearchSchema = z.object({
-//   q: z.string().min(1),
-// });
-
 export async function getProductsByQuery({
   q,
+  take,
 }: {
   q: string;
+  take: number;
 }): Promise<FullProduct[]> {
-  // console.log(q);
-
-  // const validatedFields = ProductSearchSchema.safeParse({ q });
-
-  // if (!validatedFields.success) {
-  //   return [];
-  // }
-
   if (!q) {
     return [];
   }
@@ -31,6 +21,7 @@ export async function getProductsByQuery({
           contains: q,
         },
       },
+      take,
       include: {
         category: true,
         images: true,

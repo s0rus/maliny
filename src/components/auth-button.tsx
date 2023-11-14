@@ -6,6 +6,8 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import { Button } from "./ui/button";
+import { Icon } from "./ui/icon";
 import { Skeleton } from "./ui/skeleton";
 
 export default function AuthButton() {
@@ -19,7 +21,11 @@ export default function AuthButton() {
           <UserButton />
         </SignedIn>
         <SignedOut>
-          <SignInButton />
+          <SignInButton>
+            <Button variant="outline" size="icon">
+              <Icon.user />
+            </Button>
+          </SignInButton>
         </SignedOut>
       </ClerkLoaded>
     </>
