@@ -1,7 +1,7 @@
 import Link from "next/link";
 import AuthButton from "./auth-button";
+import CartButton from "./cart-button";
 import { Search } from "./search";
-import { ThemeSwitch } from "./ui/theme-switch";
 
 const MainNavbar = () => {
   return (
@@ -11,11 +11,9 @@ const MainNavbar = () => {
           <span className="text-3xl font-bold">Maliny</span>
         </Link>
       </div>
-      <div className="flex-1">
-        <Search />
-      </div>
+      <Search />
       <div className="flex items-center gap-4">
-        <ThemeSwitch />
+        <CartButton />
         <AuthButton />
       </div>
     </nav>

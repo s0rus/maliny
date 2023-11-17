@@ -53,19 +53,16 @@ export function Search() {
                 handleSearch(e.target.value);
               }}
               defaultValue={query}
-              className="w-[60vw]"
+              className="w-[50vw] max-w-[920px] rounded-r-none"
             />
           </PopoverTrigger>
-          <Button type="submit">
+          <Button type="submit" className="rounded-l-none">
             <Icon.search />
           </Button>
         </div>
         {query && (
           <PopoverContent
-            onFocusCapture={(e) => {
-              e.preventDefault();
-            }}
-            className="w-[60vw]"
+            className="w-[50vw] max-w-[920px]"
             onOpenAutoFocus={(e) => {
               e.preventDefault();
             }}

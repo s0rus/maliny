@@ -4,6 +4,7 @@ export const ROUTES = {
   HOME: "/",
   SEARCH: "/search",
   PRODUCTS: "/products",
+  CART: "/cart",
   DASHBOARD: {
     HOME: `${DASHBOARD_BASE_ROUTE}`,
     PRODUCTS: `${DASHBOARD_BASE_ROUTE}/products`,
@@ -21,5 +22,6 @@ export const API_ROUTES = {
   PRODUCTS: `${API_BASE_ROUTE}/products`,
   CATEGORIES: `${API_BASE_ROUTE}/categories`,
   SPECIFICATIONS: `${API_BASE_ROUTE}/specifications`,
+  CARTS: `${API_BASE_ROUTE}/carts`,
   UPLOADTHING: `${API_BASE_ROUTE}/uploadthing`,
 } as const;

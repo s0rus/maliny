@@ -25,12 +25,13 @@ export function ProductCard({ product }: ProductCardProps) {
       <Card>
         <CardHeader className="p-0">
           <CardTitle className="pt-4">
-            <div className="flex max-h-[200px] min-h-[200px] w-full cursor-pointer items-center justify-center overflow-hidden object-contain object-center p-2">
+            <div className="flex cursor-pointer items-center justify-center overflow-hidden p-2">
               <Image
                 alt={`${product.name}'s image`}
                 src={product.images[0].image_url}
-                width={100}
-                height={100}
+                width={200}
+                height={200}
+                className="h-auto"
               />
             </div>
           </CardTitle>

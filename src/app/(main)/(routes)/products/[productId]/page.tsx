@@ -46,7 +46,11 @@ export default async function CertainProductPage({
                 <SpecPreview specList={specPreview} />
               </div>
             </div>
-            <AddToCartDetails price={product.price} stock={product.stock} />
+            <AddToCartDetails
+              productId={product.id}
+              price={product.price}
+              stock={product.stock}
+            />
           </div>
         </div>
         <div className="prose prose-invert">

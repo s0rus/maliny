@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import {
   Select,
@@ -10,11 +9,38 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { SubmitButton } from "@/components/ui/submit-button";
+import { useToast } from "@/components/ui/use-toast";
+import { addItemToCart } from "../../../cart/actions";
 
-export function AddToCartForm() {
+interface AddToCartFormProps {
+  productId: string;
+}
+
+export function AddToCartForm({ productId }: AddToCartFormProps) {
+  const { toast } = useToast();
+
+  async function dispatchAction(formData: FormData) {
+    const result = await addItemToCart(null, formData);
+    if (result.message && !result.errors) {
+      toast({
+        title: result.message,
+      });
+    } else {
+      toast({
+        variant: "destructive",
+        title: result.message,
+      });
+    }
+  }
+
   return (
-    <form className="flex flex-row justify-between gap-4">
-      <Select defaultValue="1">
+    <form
+      className="flex flex-row justify-between gap-4"
+      action={dispatchAction}
+    >
+      <input type="hidden" name="productId" value={productId} />
+      <Select defaultValue="1" name="quantity">
         <SelectTrigger className="w-[64px]">
           <SelectValue />
         </SelectTrigger>
@@ -28,10 +54,9 @@ export function AddToCartForm() {
           </SelectGroup>
         </SelectContent>
       </Select>
-      <Button className="inline-flex flex-1 gap-2 px-8" type="submit">
-        <Icon.cart />
+      <SubmitButton icon={<Icon.cart />} className="w-full">
         Add to cart
-      </Button>
+      </SubmitButton>
     </form>
   );
 }

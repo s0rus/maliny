@@ -9,6 +9,7 @@ export default authMiddleware({
     "/api/categories",
     "/api/specifications",
     "/api/products",
+    "/api/carts",
     "/api/uploadthing",
   ],
 });

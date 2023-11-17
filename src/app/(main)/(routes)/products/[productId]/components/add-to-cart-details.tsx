@@ -10,11 +10,16 @@ import { calculateShippingInfo, priceFormatter } from "@/lib/utils";
 import { AddToCartForm } from "./add-to-cart-form";
 
 interface AddToCartDetailsProps {
+  productId: string;
   stock: number;
   price: number;
 }
 
-export function AddToCartDetails({ price, stock }: AddToCartDetailsProps) {
+export function AddToCartDetails({
+  productId,
+  price,
+  stock,
+}: AddToCartDetailsProps) {
   const { arrival, payWithin } = calculateShippingInfo();
 
   return (
@@ -23,7 +28,7 @@ export function AddToCartDetails({ price, stock }: AddToCartDetailsProps) {
         {priceFormatter().format(price)}
       </CardHeader>
       <CardContent className="px-3 pb-3">
-        <AddToCartForm />
+        <AddToCartForm productId={productId} />
       </CardContent>
       <Separator />
       <CardFooter className="py-2">

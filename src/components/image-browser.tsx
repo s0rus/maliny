@@ -79,7 +79,7 @@ export function ImageBrowser({
                   alt="image"
                   width={64}
                   height={64}
-                  className="h-auto w-auto"
+                  className="h-auto"
                 />
               </Button>
             </DialogTrigger>
@@ -106,6 +106,7 @@ export function ImageBrowser({
               width={300}
               height={364}
               priority
+              className="h-auto max-w-full cursor-pointer"
             />
           </div>
           <div className="flex h-full items-center">
