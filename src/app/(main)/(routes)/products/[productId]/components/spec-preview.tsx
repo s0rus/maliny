@@ -1,6 +1,6 @@
 "use client";
 
-import { Specifications } from "@/app/api/products/get-products";
+import { type Specifications } from "@/app/api/products/get-products";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { TypographyMuted } from "@/components/ui/typography/typography-muted";

@@ -75,7 +75,9 @@ export async function addItemToCart(_prevState: unknown, formData: FormData) {
               product_id: productId,
             },
             update: {
-              quantity,
+              quantity: {
+                increment: quantity,
+              },
               product_id: productId,
             },
           },

@@ -10,6 +10,7 @@ import { AddToCartDetails } from "./components/add-to-cart-details";
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
+import { RecentlyWatched } from "./components/recently-watched";
 import { SpecPreview } from "./components/spec-preview";
 
 interface CertainProductPageProps {
@@ -80,6 +81,15 @@ export default async function CertainProductPage({
             </TableBody>
           </Table>
         </div>
+        <RecentlyWatched
+          product={{
+            id: product.id,
+            name: product.name,
+            imageUrl: product.images[0].image_url,
+            price: product.price,
+            categoryName: product.category.name,
+          }}
+        />
       </div>
     </Suspense>
   );
