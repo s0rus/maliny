@@ -18,7 +18,7 @@ interface ManageCategoryFormProps {
 export default function ManageCategoryForm({
   initialData,
 }: ManageCategoryFormProps) {
-  const initialState = { message: null, errors: {} };
+  const initialState = { message: "", errors: {} };
   const [state, dispatch] = useFormState(
     !initialData ? createCategory : updateCategory,
     initialState,

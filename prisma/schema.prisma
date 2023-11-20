@@ -101,3 +101,19 @@ model CartEntry {
 
   @@index([product_id])
 }
+
+model Address {
+  id      String @id @unique @default(uuid())
+  user_id String
+
+  first_name String
+  last_name  String
+
+  phone_number String
+
+  street        String
+  street_number Int
+
+  zipcode String
+  city    String
+}

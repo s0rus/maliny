@@ -10,7 +10,7 @@ import { AddToCartDetails } from "./components/add-to-cart-details";
 
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { RecentlyWatched } from "./components/recently-watched";
+import { RecentlyViewed } from "./components/recently-viewed";
 import { SpecPreview } from "./components/spec-preview";
 
 interface CertainProductPageProps {
@@ -81,7 +81,7 @@ export default async function CertainProductPage({
             </TableBody>
           </Table>
         </div>
-        <RecentlyWatched
+        <RecentlyViewed
           product={{
             id: product.id,
             name: product.name,

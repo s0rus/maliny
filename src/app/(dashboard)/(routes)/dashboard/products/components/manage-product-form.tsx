@@ -77,7 +77,7 @@ export default function ManageProductForm({
 
   const specArray = form.watch("specifications");
 
-  const initialState = { message: null, errors: {} };
+  const initialState = { message: "", errors: {} };
   const [, dispatch] = useFormState(
     !initialData ? createProduct : updateProduct,
     initialState,

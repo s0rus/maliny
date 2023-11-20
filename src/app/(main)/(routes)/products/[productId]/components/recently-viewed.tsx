@@ -15,19 +15,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 
-type RecentlyWatchedProduct = Pick<FullProduct, "id" | "name" | "price"> & {
+type RecentlyViewedProduct = Pick<FullProduct, "id" | "name" | "price"> & {
   imageUrl: string;
   categoryName: string;
 };
 
-interface RecentlyWatchedProps {
-  product: RecentlyWatchedProduct | null;
+interface RecentlyViewedProps {
+  product?: RecentlyViewedProduct;
 }
 
 const RECENTLY_WATCHED_KEY = "mln_rw" as const;
 
-export function RecentlyWatched({ product }: RecentlyWatchedProps) {
-  const [products, setProducts] = useState<RecentlyWatchedProduct[] | []>([]);
+export function RecentlyViewed({ product }: RecentlyViewedProps) {
+  const [products, setProducts] = useState<RecentlyViewedProduct[] | []>([]);
 
   useEffect(() => {
     setProducts(getProductsArray());
@@ -36,7 +36,7 @@ export function RecentlyWatched({ product }: RecentlyWatchedProps) {
   const getProductsArray = () => {
     const storedProducts = localStorage.getItem(RECENTLY_WATCHED_KEY);
     if (storedProducts) {
-      return JSON.parse(storedProducts) as RecentlyWatchedProduct[];
+      return JSON.parse(storedProducts) as RecentlyViewedProduct[];
     }
     return [];
   };
@@ -48,11 +48,11 @@ export function RecentlyWatched({ product }: RecentlyWatchedProps) {
     [products],
   );
 
-  const saveProductsArray = (data: RecentlyWatchedProduct[]) => {
+  const saveProductsArray = (data: RecentlyViewedProduct[]) => {
     localStorage.setItem(RECENTLY_WATCHED_KEY, JSON.stringify(data));
   };
 
-  const handleRecentlyWatchedChange = useCallback(() => {
+  const handleRecentlyViewedChange = useCallback(() => {
     if (!product) {
       return;
     }
@@ -65,8 +65,8 @@ export function RecentlyWatched({ product }: RecentlyWatchedProps) {
   }, [product, products, isItemSaved]);
 
   useEffect(() => {
-    handleRecentlyWatchedChange();
-  }, [product, products, handleRecentlyWatchedChange]);
+    handleRecentlyViewedChange();
+  }, [product, products, handleRecentlyViewedChange]);
 
   return (
     <div className="flex flex-col gap-2">

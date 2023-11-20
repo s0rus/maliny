@@ -10,7 +10,7 @@ import { TypographyMuted } from "@/components/ui/typography/typography-muted";
 import { priceFormatter } from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
 import Link from "next/link";
-import { RecentlyWatched } from "../products/[productId]/components/recently-watched";
+import { RecentlyViewed } from "../products/[productId]/components/recently-viewed";
 import { CartItemsTable } from "./components/cart-items-table";
 import { EmptyCartForm } from "./components/empty-cart-form";
 
@@ -40,7 +40,7 @@ export default async function CartPage() {
             </Button>
           </div>
         </div>
-        <RecentlyWatched product={null} />
+        <RecentlyViewed />
       </div>
     );
   }
@@ -84,9 +84,9 @@ export default async function CartPage() {
                 {priceFormatter().format(priceSum) || 0}
               </TypographyH4>
             </div>
-            <Button asChild className="inline-flex w-full gap-4">
-              <Link href={"/shipping"}>
-                Go to shipping
+            <Button asChild className="inline-flex w-full gap-2">
+              <Link href={ROUTES.CHECKOUT}>
+                Checkout
                 <Icon.chevronRight className="h-4 w-4" />
               </Link>
             </Button>

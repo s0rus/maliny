@@ -10,6 +10,7 @@ export default authMiddleware({
     "/api/specifications",
     "/api/products",
     "/api/carts",
+    "/api/addresses",
     "/api/uploadthing",
   ],
 });
