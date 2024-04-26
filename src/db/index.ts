@@ -1,15 +1,12 @@
+import { env } from "@/lib/env.mjs";
+import { createClient } from "@libsql/client";
+import { PrismaLibSQL } from "@prisma/adapter-libsql";
 import { PrismaClient } from "@prisma/client";
 
-const prismaClientSingleton = () => {
-  return new PrismaClient();
-};
+const libsql = createClient({
+  url: env.TURSO_DATABASE_URL,
+  authToken: env.TURSO_AUTH_TOKEN,
+});
 
-type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>;
-
-const globalForPrisma = globalThis as unknown as {
-  db: PrismaClientSingleton | undefined;
-};
-
-export const db = globalForPrisma.db ?? prismaClientSingleton();
-
-if (process.env.NODE_ENV !== "production") globalForPrisma.db = db;
+const adapter = new PrismaLibSQL(libsql);
+export const db = new PrismaClient({ adapter });

@@ -1,6 +1,6 @@
 import { getCart } from "@/app/api/carts/get-cart";
 import { ROUTES } from "@/app/api/routes";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";

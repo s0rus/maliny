@@ -2,7 +2,7 @@
 
 import { ROUTES } from "@/app/api/routes";
 import { db } from "@/db";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 

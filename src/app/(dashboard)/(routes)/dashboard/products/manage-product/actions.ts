@@ -154,7 +154,6 @@ export async function updateProduct(_prevState: State, formData: FormData) {
                 spec_id: spec.specId,
                 value: spec.value,
               })),
-              skipDuplicates: true,
             },
             updateMany: specsToUpdate.map((spec) => ({
               data: {
@@ -177,7 +176,6 @@ export async function updateProduct(_prevState: State, formData: FormData) {
                 image_key: image.fileKey,
                 image_url: image.fileUrl,
               })),
-              skipDuplicates: true,
             },
             deleteMany: {
               image_key: {

@@ -18,10 +18,16 @@ export default function AuthButton() {
       </ClerkLoading>
       <ClerkLoaded>
         <SignedIn>
-          <UserButton />
+          <UserButton
+            appearance={{
+              elements: {
+                userButtonAvatarBox: "w-10 h-10 rounded-md",
+              },
+            }}
+          />
         </SignedIn>
         <SignedOut>
-          <SignInButton>
+          <SignInButton mode="modal">
             <Button variant="outline" size="icon">
               <Icon.user />
             </Button>

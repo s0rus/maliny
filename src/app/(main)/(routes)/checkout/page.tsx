@@ -8,7 +8,7 @@ import { TypographyH3 } from "@/components/ui/typography/typography-h3";
 import { TypographyH4 } from "@/components/ui/typography/typography-h4";
 import { TypographyMuted } from "@/components/ui/typography/typography-muted";
 import { priceFormatter } from "@/lib/utils";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { AddressCard } from "./components/address-card";
